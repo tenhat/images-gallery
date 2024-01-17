@@ -6,6 +6,15 @@
         "javascriptreact"
     ],
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": "explicit"
+        "source.fixAll.eslint": "true"
+    },
+    "python.linting.pycodestyleEnabled": true,
+    "python.linting.pycodestyelArgs": [
+        "--max-line-length=88"
+    ],
+    "python.linting.pylintEnabled": true,
+    "python.formatting.provider": "black",
+    "[python]": {
+        "editor.formatOnSave": true
     }
 }
