@@ -41,6 +41,23 @@ const App = () => {
     setImages(images.filter((image) => image.id !== id));
   };
 
+  const hancleSaveImage = async (id) => {
+    const selectedImage = images.find((image) => image.id === id);
+    selectedImage.saved = true;
+    try {
+      const res = await axios.post(`${API_URL}/images`, selectedImage);
+      if (res.data?.inserted_id) {
+        setImages(
+          images.map((image) =>
+            image.id === id ? { ...image, saved: true } : image,
+          ),
+        );
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="App">
       <Header title="Images Gallery" />
@@ -50,7 +67,11 @@ const App = () => {
           <Row xs={1} md={2} lg={3}>
             {images.map((image, i) => (
               <Col key={i} className="pb-3">
-                <ImageCard image={image} deleteImage={handleDeleteImage} />
+                <ImageCard
+                  image={image}
+                  deleteImage={handleDeleteImage}
+                  saveImage={hancleSaveImage}
+                />
               </Col>
             ))}
           </Row>
