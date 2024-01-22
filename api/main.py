@@ -46,10 +46,10 @@ def images():
     if request.method == "POST":
         # save image to database
         image = request.get_json()
-        # image["_id"] = image.get("id")
+        image["_id"] = image.get("id")
         result = images_collection.insert_one(image)
-        # inserted_id = result.inserted_id
-        inserted_id = image.get("id")
+        inserted_id = result.inserted_id
+        # inserted_id = image.get("id")
         return {"inserted_id": inserted_id}
 
 if __name__ == "__main__":
